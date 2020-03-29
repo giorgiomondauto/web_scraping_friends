@@ -1,1 +1,1 @@
-!['Output Example'](Friends_Script.png)
+![Output Example](Friends_Script.png)
