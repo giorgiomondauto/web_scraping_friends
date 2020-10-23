@@ -24,7 +24,9 @@ def get_urls():
     return URLS
 
 
-
+#To parse each element 
+#retain only actor line
+#remove text in parenthesis and bracket
 def parse_content(elmts):
     parsed_content = []
     for elmt in elmts:
@@ -45,7 +47,6 @@ def parse_content(elmts):
 
 # For each url ,get content of the page 
 # get  all <p> elements
-
 def fetch_pages(urls):
     failed_urls = []
     N = len(urls)
@@ -68,8 +69,12 @@ def fetch_pages(urls):
             print(f'page {i} on {N} processed')
 
     
+
+    #Save all the scraped data in csv file
     data = pd.DataFrame(sentences, columns=['actor','quote'])
     data.to_csv('data.csv',sep='\t', header=True, index=False)
+
+    #check if failed url 
     if len(failed_urls) > 0:
         print(failed_urls)
 
