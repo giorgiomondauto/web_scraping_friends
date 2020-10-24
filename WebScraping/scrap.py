@@ -1,11 +1,10 @@
 import requests
-from requests import get
 from bs4 import BeautifulSoup
 import re
 import pandas as pd
 from lxml import html
 import ftfy #to fix text
-import re 
+
 
 sentences = []
 
@@ -30,7 +29,7 @@ def parse_content(elmts):
        
         content = content.replace('\n',' ') # remove new line 
         content = re.sub('\(.*?\)', ' ', content)  #remove text in parenthesis
-        content = re.sub('\[].*?\]', ' ', content) #remove line in square bracket
+        content = re.sub('\[.*?\]', ' ', content)  #remove line in square bracket
         
         content = ftfy.fix_text(content)
         if len(content.split(':')) == 2:
@@ -64,7 +63,7 @@ def fetch_pages(urls):
 
     #Save all the scraped data in csv file
     data = pd.DataFrame(sentences, columns=['actor','quote'])
-    data.to_csv('data.csv', header=True, index=False)
+    data.to_csv('../data/data.csv', header=True, index=False)
 
     #check if failed url 
     if len(failed_urls) > 0:
